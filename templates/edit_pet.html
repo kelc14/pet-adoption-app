@@ -1,0 +1,56 @@
+{% extends "base.html" %} {% block title %}{{pet.name}}{% endblock %} {% block
+content %}
+<h1 class="display-3 text-center">South Florida Pet Rescue</h1>
+
+<div class="container">
+  {% if pet.photo_url %}
+  <img
+    src="{{pet.photo_url}}"
+    class="card-img-top pet-image"
+    alt="{{pet.name}} photo"
+  />
+  {% else %}
+  <img
+    src="/static/images/generic_pet.jpg"
+    alt="generic pet outline"
+    class="card-img-top pet-image"
+  />
+  {% endif %}
+  <div class="container">
+    <h2 class="display-4">About {{pet.name}}</h2>
+    <ul>
+      <li style="list-style: none"><b>Species:</b> {{pet.species}}</li>
+      <li style="list-style: none"><b>Age:</b> {{pet.age}}</li>
+    </ul>
+  </div>
+
+  <div class="container mt-3" style="border: 2px solid black">
+    <h3 class="display-6 mt-2">Edit {{pet.name}}'s Info</h3>
+    <form id="pet-add-form" method="POST" action="/{{pet.id}}">
+      {{ form.hidden_tag() }}
+      <!--add type=hidden form fields -->
+      {% for field in form if field.widget.input_type != 'hidden' and field.name
+      not in ['name', 'species', 'age', 'available'] %}
+
+      <div class="form-group my-3">
+        {{ field.label }} {{ field (class_="form-control") }} {% for error in
+        field.errors %} {{ error }} {% endfor %}
+      </div>
+
+      {% endfor %}
+
+      <div class="form-group my-3">
+        {{ form.available.label }} {{ form.available (class_="form-control",
+        style_="list-style:none") }} {% for error in form.available.errors %} {{
+        error }} {% endfor %}
+      </div>
+
+      <div class="container mb-3">
+        <button type="submit" class="btn btn-success">Submit</button>
+        <a href="/" class="btn btn-d">Go Back to Home Page</a>
+      </div>
+    </form>
+  </div>
+
+  {% endblock %}
+</div>

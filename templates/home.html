@@ -1,0 +1,46 @@
+{% extends "base.html" %} {% block title %}HOME{% endblock %} {% block content
+%}
+<h1 class="display-1 text-center">South Florida Pet Rescue</h1>
+{% with messages = get_flashed_messages() %} {% if messages %} {% for message in
+messages %}
+<div class="alert alert-success text-center" role="alert">
+  <span>{{ message }}</span>
+</div>
+{% endfor %} {% endif %} {% endwith %}
+<a href="/add" class="btn btn-d">Add New Pet</a>
+<div class="container">
+  {% for pet in pets %}
+  <div class="card mx-3 mt-3">
+    {% if pet.photo_url %}
+    <img
+      src="{{pet.photo_url}}"
+      class="card-img-top pet-image"
+      alt="{{pet.name}} photo"
+    />
+    {% else %}
+    <img
+      src="/static/images/generic_pet.jpg"
+      alt="generic pet outline"
+      class="card-img-top pet-image"
+    />
+    {% endif %}
+    <div class="card-body">
+      <h5 class="card-title text-theme-d">{{pet.name}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{pet.species}}</h6>
+      {% if pet.available %}
+      <p class="card-text">
+        This pet is <b class="text-theme-m">available</b> for adoption.
+      </p>
+      {% else %}
+      <p>This pet is not currently available for adoption.</p>
+      {% endif %}
+      <a href="/{{pet.id}}" class="btn btn-d"
+        >More Information on {{pet.name}}</a
+      >
+    </div>
+  </div>
+
+  {% endfor %}
+</div>
+
+{% endblock %}

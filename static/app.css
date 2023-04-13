@@ -1,0 +1,25 @@
+.text-theme-vd {
+  color: #0b2447;
+}
+
+.text-theme-d {
+  color: #19376d;
+}
+
+.text-theme-m {
+  color: #576cbc;
+}
+
+.text-theme-l {
+  color: #a5d7e8;
+}
+
+.btn-d {
+  background-color: #0b2447;
+  color: white;
+}
+
+.btn-d:hover {
+  background-color: #576cbc;
+  color: white;
+}

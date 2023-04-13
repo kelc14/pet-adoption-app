@@ -1,0 +1,30 @@
+{% extends "base.html" %} {% block title %}Add Pet{% endblock %} {% block
+content %}
+<h1 class="display-2 text-center">Add a New Pet</h1>
+
+<div class="container">
+  <form id="pet-add-form" method="POST">
+    {{ form.hidden_tag() }}
+    <!--add type=hidden form fields -->
+
+    {% for field in form if field.widget.input_type != 'hidden' and field.type
+    != "RadioField" %}
+
+    <div class="form-group my-3">
+      {{ field.label }} {{ field (class_="form-control") }} {% for error in
+      field.errors %} {{ error }} {% endfor %}
+    </div>
+
+    {% endfor %}
+
+    <div class="form-group my-3">
+      {{ form.available.label }} {{ form.available (class_="form-control",
+      style_="list-style:none") }} {% for error in form.available.errors %} {{
+      error }} {% endfor %}
+    </div>
+    <a href="/" class="btn btn-danger">Cancel</a>
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>
+
+{% endblock %}
